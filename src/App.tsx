@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import AddUsers from "./components/AddUsers";
+import UserList from "./components/UserList";
 
-function App() {
-  const [count, setCount] = useState(0)
+// Define the user type
+type user = { name: string; age: string; id: string };
+
+const App = () => {
+  // State to store the list of users
+  const [users, setUsers] = useState<user[]>([]);
+
+  // Function to add a new user to the list
+  const handleAddUsers = ({ name, age, id }: user) => {
+    setUsers((prevState) => [...prevState, { name, age, id }]);
+  };
+
+  // Function to remove a user by id
+  const handleRemoveUser = (id: string) => {
+    setUsers((prevState) => prevState.filter((item) => id !== item.id));
+  };
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+    <>
+      {/* Add user form */}
+      <AddUsers onAddUser={handleAddUsers} />
+      {/* Conditional rendering of the UserList component */}
+      {users.length > 0 && (
+        <UserList users={users} onRemove={handleRemoveUser} />
+      )}
+    </>
+  );
+};
 
-export default App
+export default App;

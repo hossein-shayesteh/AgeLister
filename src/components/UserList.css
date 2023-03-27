@@ -1,0 +1,23 @@
+.users {
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 40rem;
+}
+
+.users ul {
+    list-style: none;
+    padding: 2rem;
+}
+
+.users li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #ccc;
+    cursor: pointer;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    transition: all ease .2s;
+}
+.users li:hover{
+    border-bottom: 2px solid #1abc9c;
+}
